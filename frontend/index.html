@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupportDesk | Customer Support</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <h2>🎧 SupportDesk</h2>
+        <p class="sidebar-label">WORKSPACE</p>
+        <a href="#" class="nav-item active">▦ &nbsp; Dashboard</a>
+        <a href="#tickets" class="nav-item">🎫 &nbsp; My Tickets</a>
+        <div class="sidebar-bottom">
+            <p>Customer Support Portal</p>
+            <small>AI-Powered Ticket System</small>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <h1>Customer Support Dashboard</h1>
+                <p class="subtitle">Manage your support requests in one place.</p>
+            </div>
+            <span class="connection connecting" id="connectionStatus">
+                <span class="dot"></span> Connecting to API...
+            </span>
+        </header>
+
+        <section class="welcome">
+            <div>
+                <h2>Welcome to SupportDesk 👋</h2>
+                <p>Create a support ticket and track its progress here.</p>
+            </div>
+            <button id="newTicketBtn">+ Create New Ticket</button>
+        </section>
+
+        <section class="stats">
+            <article class="stat-card">
+                <p>Total Tickets</p>
+                <h2 id="totalCount">0</h2>
+                <span>All support requests</span>
+            </article>
+            <article class="stat-card">
+                <p>Open</p>
+                <h2 id="openCount">0</h2>
+                <span>Waiting for attention</span>
+            </article>
+            <article class="stat-card">
+                <p>In Progress</p>
+                <h2 id="progressCount">0</h2>
+                <span>Currently being handled</span>
+            </article>
+            <article class="stat-card">
+                <p>Resolved</p>
+                <h2 id="resolvedCount">0</h2>
+                <span>Successfully resolved</span>
+            </article>
+        </section>
+
+        <section class="tickets-panel" id="tickets">
+            <div class="panel-heading">
+                <div>
+                    <h2>Your Support Tickets</h2>
+                    <p>View and track your submitted requests.</p>
+                </div>
+                <button class="secondary-btn" id="refreshBtn">↻ Refresh</button>
+            </div>
+
+            <div class="toolbar">
+                <input type="search" id="searchInput"
+                       placeholder="Search tickets by title or description...">
+                <select id="statusFilter">
+                    <option value="">All statuses</option>
+                    <option value="open">Open</option>
+                    <option value="in_progress">In Progress</option>
+                    <option value="resolved">Resolved</option>
+                    <option value="closed">Closed</option>
+                </select>
+                <select id="priorityFilter">
+                    <option value="">All priorities</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                    <option value="critical">Critical</option>
+                </select>
+            </div>
+
+            <div id="message" role="status"></div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ticket</th>
+                            <th>Title & Description</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ticketTableBody">
+                        <tr>
+                            <td colspan="6" class="empty-state">
+                                Loading your tickets...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>SupportDesk · AI-Powered Customer Support Ticket Management System</footer>
+    </main>
+
+    <dialog id="ticketDialog">
+        <form id="ticketForm">
+            <div class="dialog-heading">
+                <div>
+                    <h2>Create a Support Ticket</h2>
+                    <p>Tell us what you need help with.</p>
+                </div>
+                <button type="button" id="closeDialog" class="close-btn"
+                        aria-label="Close">×</button>
+            </div>
+
+            <label for="ticketTitle">Ticket Title</label>
+            <input id="ticketTitle" name="title" maxlength="200"
+                   placeholder="e.g. Unable to log in" required>
+
+            <label for="ticketDescription">Description</label>
+            <textarea id="ticketDescription" name="description" rows="4"
+                      placeholder="Describe your issue..." required></textarea>
+
+            <label for="ticketPriority">Priority</label>
+            <select id="ticketPriority" name="priority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+                <option value="critical">Critical</option>
+            </select>
+
+            <div class="dialog-actions">
+                <button type="button" id="cancelBtn" class="secondary-btn">
+                    Cancel
+                </button>
+                <button type="submit" id="submitBtn">Submit Ticket</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="script.js"></script>
+</body>
+</html>
